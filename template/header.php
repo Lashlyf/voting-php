@@ -12,6 +12,10 @@ require("../dbconnect.php")
     <title>Voting System</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
@@ -67,6 +71,8 @@ require("../dbconnect.php")
     <!-- modernizr JS
 		============================================ -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+
+
 </head>
 
 <body>
@@ -150,12 +156,24 @@ require("../dbconnect.php")
                                         <div class="header-top-menu tabl-d-n hd-search-rp">
                                             <div class="breadcome-heading">
                                                 <form role="search" class="">
-                                                    <input type="text" placeholder="Search..." class="form-control" />
+                                                    <input style="color: white;" type="text" placeholder="Search..." id="search" class="form-control" />
                                                     <a href=""><i class="fa fa-search"></i></a>
+                                                    <table style="color: white;" class="table">
+                                                        <!-- <thead>
+                                                            <tr>
+                                                                <th>Id</th>
+                                                                <th>Name</th>
+                                                            </tr>
+                                                        </thead> -->
+                                                        <tbody id="output">
+
+                                                        </tbody>
+                                                    </table>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
 
                                         <!-- Top Menu - Right Items -->
@@ -295,3 +313,23 @@ require("../dbconnect.php")
             <!-- Mobile Menu end -->
 
         </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#search").keyup(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: 'search.php',
+                    data: {
+                        name: $("#search").val(),
+                    },
+                    success: function(data) {
+                        $("#output").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
