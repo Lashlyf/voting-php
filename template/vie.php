@@ -42,7 +42,7 @@ if (isset($_POST['vie-submit'])) {
         $error = "<p style='color:red;'>You have already registred for this position.</p>";
     } else {
         //   saving data to database
-        $sql = "INSERT INTO candidate (user__id,position_id, election_id) VALUES($user_id,$position_id,$election_id)";
+        $sql = "INSERT INTO candidate (user_id,position_id, election_id) VALUES($user_id,$position_id,$election_id)";
 
         if ($dbconnect->query($sql) === TRUE) {
             $success = "<p style='color:green;'>You have successfully registered.</p>";
